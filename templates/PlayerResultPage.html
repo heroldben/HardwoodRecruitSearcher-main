@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recruits Found</title>
+    <!-- Link to external CSS file -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/playerResultStyle.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Recruits Found</h1>
+    <ul>
+      {% for item in players %}
+      <li>
+        <a href="{{ item }}" class="link" target="_blank">{{ item }}</a>
+        <span>View Profile</span>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <!-- Form to trigger Python backend and open all links -->
+    <form method="POST">
+      <button type="submit">Open All Links</button>
+    </form>
+  </body>
+</html>
