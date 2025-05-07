@@ -38,7 +38,7 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
         "JCFR": "11",
         "JCSO": "12"
     }
-    playerRegion = {"All": "0", "NE": "6", "MA": "MA", "MW": "4", "WI": "WI"}
+    playerRegion = {"All": "0", "NE": "6", "MA": "MA", "MW": "4", "WI": "WI", "CE":"2", "IN":"IN"}
     playerLengthSearch = 700
     if wantedRegion == "All":
         playerLengthSearch = 3000

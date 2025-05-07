@@ -78,6 +78,9 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
     ]
 
     InsideShooting = {
+        "Great": {
+            "Could be a good post player", "Could be a very good post player", "Could be a dominating post player"
+        },
         "Good": {
             "Above average post moves", "Could be a good post player",
             "Could be a very good post player", "Could be a dominating post player"
@@ -85,6 +88,10 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
         "Bad": ""
     }
     OutsideShooting = {
+        "Great" : {
+            "Could be a good shooter",
+            "Could be an excellent shooter"
+        },
         "Good": {
             "Could be an above average shooter", "Could be a good shooter",
             "Could be an excellent shooter"
@@ -93,10 +100,12 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
     }
     Range = {"Good": {"Could really be a long-range shooter"}, "Bad": {}}
     Rebounding = {
+        "Great": {"Can be a monster on the boards"},
         "Good": {"Can be a decent rebounder", "Can be a monster on the boards"},
         "Bad": {"Can never be a good rebounder"}
     }
     PlusDefense = {
+        "Great": {"Can be a great all-around defensive player"},
         "Good": {"Can be a good all-around defensive player", "Can be a great all-around defensive player"},
         "Bad": {}
     }
@@ -109,24 +118,26 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
         "Bad": {"Will never be a good perimeter defender",}
     }
     IQ = {
-        "Good": {"Can be a smart player", "Can be a really smart player"},
+        "Great": {"Can be a really smart player"},
+        "Good": {
+                "Can be a smart player", 
+                "Can be a really smart player"},
         "Bad": {
             "Can be prone to a lot of mental mistakes",
         }
     }
     Passing = {
-        "Good": {
-            "Can be a skilled passer",
-            "Can be a skilled passer with exceptional court vision"
-        },
+        "Great": {"Can be a skilled passer with exceptional court vision"},
+        "Good": {"Can be a skilled passer","Can be a skilled passer with exceptional court vision"},
         "Bad": {}
     }
     Handling = {
-        "Good":
-        {"Can be a decent ball handler", "Can be a really good ball handler"},
+        "Great": {"Can be a really good ball handler"},
+        "Good": {"Can be a decent ball handler", "Can be a really good ball handler"},
         "Bad": {"Will be a below average ball handler"}
     }
     Speed = {
+        "Great": {"Will be very quick","Will be quick as lightning"},
         "Good": {
             "Can be a speedy player", "Will be very quick",
             "Will be quick as lightning"
@@ -235,7 +246,10 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
         if preference_key and preference_key in locals(
         ) and preference_key != "":  # Exclude empty keys
             corresponding_dict = locals()[preference_key]
-            if user_input == 'Y':
+            if user_input == 'G':
+                resultDic.setdefault(preference_key, set()).update(
+                    ("Great", item) for item in corresponding_dict["Great"])
+            elif user_input == 'Y':
                 resultDic.setdefault(preference_key, set()).update(
                     ("Good", item) for item in corresponding_dict["Good"])
             elif user_input == 'N':
@@ -407,13 +421,19 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
                                     #Leaves Room for Error in Predictions
                 if (min_measureableDiff == "N" or (playerMeasureableDiff - 2)  >= float(min_measureableDiff) ) and (playerPredictedHeight >= wantedMinHeight) and  (pred_wingspan + 1 > wanted_wingspan) and (pred_vert + 1 > wanted_vert):
                     for key, values in resultDic.items():
+                        great_values = [
+                            value for qualifier, value in values if qualifier == "Great"
+                        ]
                         good_values = [
                             value for qualifier, value in values if qualifier == "Good"
                         ]
                         bad_values = [
                             value for qualifier, value in values if qualifier == "Bad"
                         ]
-                        if not any(good_value in recEval
+                        if not any(great_value in recEval
+                                for great_value in great_values) and great_values != []:
+                            break
+                        elif not any(good_value in recEval
                                 for good_value in good_values) and good_values != []:
                             break
                         elif any(bad_value in recEval for bad_value in bad_values):
@@ -429,13 +449,19 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
                 #For Non HS Prospects
                 if playerEvalIndex >= preferenceIndex and  (curr_wingspan >= wanted_wingspan) and (curr_vert >= wanted_vert):
                     for key, values in resultDic.items():
+                        great_values = [
+                            value for qualifier, value in values if qualifier == "Great"
+                        ]
                         good_values = [
                             value for qualifier, value in values if qualifier == "Good"
                         ]
                         bad_values = [
                             value for qualifier, value in values if qualifier == "Bad"
                         ]
-                        if not any(good_value in recEval
+                        if not any(great_value in recEval
+                                for great_value in great_values) and great_values != []:
+                            break
+                        elif not any(good_value in recEval
                                 for good_value in good_values) and good_values != []:
                             break
                         elif any(bad_value in recEval for bad_value in bad_values):
