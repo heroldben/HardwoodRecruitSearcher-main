@@ -47,12 +47,13 @@ def search():
     early_commit = request.form.get("EarlyCommit")
     close_home = request.form.get("CloseHome")
     min_measureableDiff = request.form.get("MeasureableDiff") #Big Man Measureable Ratio
+    pace = request.form.get("Pace")
 
 
     
     playersFoundArr = recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, min_potential, min_si, min_height, min_wingspan, min_vertical,
                  inside_shooting, outside_shooting, rangeVal, rebounding, plus_defense, inside_defense, 
-                 perimeter_defense, iq, passing, handling, speed, far_home,early_commit,close_home,min_measureableDiff)
+                 perimeter_defense, iq, passing, handling, speed, far_home,early_commit,close_home,min_measureableDiff,pace)
 
  
 

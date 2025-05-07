@@ -24,7 +24,7 @@ def load_html_from_file(filename):
 
 def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, min_potential, min_si, min_height, min_wingspan, min_vertical,
                  inside_shooting, outside_shooting, rangeVal, rebounding, plus_defense, inside_defense, 
-                 perimeter_defense, iq, passing, handling, speed, far_home,early_commit,close_home, min_measureableDiff):
+                 perimeter_defense, iq, passing, handling, speed, far_home,early_commit,close_home, min_measureableDiff,pace):
     
     hardwoodBeginnerUrl = "http://onlinecollegebasketball.org"
 
@@ -144,7 +144,10 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
         },
         "Bad": {"Will always be a bit sluggish"}
     }
-    #Pace = {"Good":{"Will flourish in a slower tempo offense","Will flourish in a fast pace offense"},"Bad":{"Will struggle in a slower tempo offense","Will struggle in a fast pace offense"}}
+    Pace = {
+        "Great":{"Will flourish in a fast pace offense"},
+        "Good":{"Will flourish in a slower tempo offense"},
+        "Bad":{"Will struggle in a slower tempo offense","Will struggle in a fast pace offense"}}
     ####
     FarHome = {"Good": {"Has no preference"}, "Bad": {}}
     ####
@@ -178,7 +181,8 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
         speed,
         far_home,
         early_commit,
-        close_home
+        close_home,
+        pace
     ]
 
     #Finds the links of every player with the minimum inputted Potential and SI values
@@ -233,7 +237,7 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
     preference_keys = [
         "", "", "", "", "", "InsideShooting", "OutsideShooting", "Range", "Rebounding","PlusDefense",
         "InsideDefense", "PerimeterDefense", "IQ", "Passing", "Handling", "Speed",
-        "FarHome","EarlyCommit","CloseHome"
+        "FarHome","EarlyCommit","CloseHome","Pace"
     ]
 
     resultDic = {}
