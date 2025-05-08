@@ -65,7 +65,7 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
         #print("Content fetched from URL and saved to file.")
 
     soup = BeautifulSoup(html_content, "html.parser")
-    infoList = soup.find_all("tr")[1:]
+    infoList = soup.find_all("tr")[1:] # [x,x,x,x,x,x,player_si,player_potential]
 
     # In[ ]:
 
@@ -189,12 +189,11 @@ def recruitSearchFunction(wantedYear, wantedRegion, recruited, developmentDiff, 
     
     if recruited == "Y":
         #Includes Recruited players
-        playerLinks = [
-            hardwoodBeginnerUrl +
+        playerLinks = [hardwoodBeginnerUrl +
             infoList[i].find_all("td")[2].find("a").get("href")
-            for i in range(len(infoList))
+            for i in range(len(infoList)) 
             if (int(infoList[i].find_all("td")[7].text) >= preferenceArr[0]) and (
-                int(infoList[i].find_all("td")[6].text) >= preferenceArr[1])
+                int(infoList[i].find_all("td")[6].text) >= preferenceArr[1]) 
         ]
     elif recruited == "L":
         #Only "Low" interested Recruited players  & None
