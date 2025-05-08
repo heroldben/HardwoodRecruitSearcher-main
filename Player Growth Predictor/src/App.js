@@ -75,6 +75,7 @@ function measurable_diff(
 export default function PlayerGrowthPredictor() {
   const [freshHeight, setFreshHeight] = useState(77);
   const [freshWeight, setFreshWeight] = useState(180);
+  const [currentHeight, setCurrentHeight] = useState(77);
   const [currentWeight, setCurrentWeight] = useState(200);
   const [currentWingspan, setCurrentWingspan] = useState(82);
   const [currentVertical, setCurrentVertical] = useState(30);
@@ -105,8 +106,23 @@ export default function PlayerGrowthPredictor() {
           type="range"
           min="120"
           max="250"
+          step="5"
           value={freshWeight}
           onChange={(e) => setFreshWeight(Number(e.target.value))}
+          className="w-full"
+        />
+
+        <label>
+          Current Height (in): {currentHeight} |{" "}
+          {inches_to_feet_inches(currentHeight)}
+        </label>
+        <input
+          type="range"
+          min="60"
+          max="88"
+          step="0.5"
+          value={currentHeight}
+          onChange={(e) => setCurrentHeight(Number(e.target.value))}
           className="w-full"
         />
 
@@ -116,6 +132,7 @@ export default function PlayerGrowthPredictor() {
           min="120"
           max="300"
           value={currentWeight}
+          step="5"
           onChange={(e) => setCurrentWeight(Number(e.target.value))}
           className="w-full"
         />
@@ -159,24 +176,35 @@ export default function PlayerGrowthPredictor() {
           Predicted Weight: <strong>{weight_pred(freshWeight)} lbs</strong>
         </p>
         <p>
-          Projected Wingspan:{" "}
+          Predicted Wingspan:{" "}
           <strong>
             {wingspan_pred(currentWingspan, P)} in |{" "}
             {inches_to_feet_inches(wingspan_pred(currentWingspan, P))}
           </strong>
         </p>
         <p>
-          Projected Vertical:{" "}
+          Predicted Vertical:{" "}
           <strong>{vertical_pred(currentVertical, P)} in</strong>
         </p>
         <p>
-          Projected Big Ratio:{" "}
+          Predicted Big Ratio:{" "}
           <strong>
             {measurable_diff(
               height_pred(freshHeight),
               weight_pred(freshWeight),
               wingspan_pred(currentWingspan, P),
               vertical_pred(currentVertical, P)
+            )}
+          </strong>
+        </p>
+        <p>
+          Current Big Ratio:{" "}
+          <strong>
+            {measurable_diff(
+              currentHeight,
+              currentWeight,
+              currentWingspan,
+              currentVertical
             )}
           </strong>
         </p>
