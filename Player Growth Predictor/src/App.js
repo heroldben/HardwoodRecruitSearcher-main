@@ -86,7 +86,10 @@ export default function PlayerGrowthPredictor() {
       <h1 className="text-xl font-bold">Player Growth Predictor</h1>
 
       <div className="space-y-2">
-        <label>Freshman Height (in): {freshHeight}</label>
+        <label>
+          Freshman Height (in): {freshHeight} |{" "}
+          {inches_to_feet_inches(freshHeight)}
+        </label>
         <input
           type="range"
           min="60"
@@ -117,7 +120,10 @@ export default function PlayerGrowthPredictor() {
           className="w-full"
         />
 
-        <label>Current Wingspan (in): {currentWingspan}</label>
+        <label>
+          Current Wingspan (in): {currentWingspan} |{" "}
+          {inches_to_feet_inches(currentWingspan)}
+        </label>
         <input
           type="range"
           min="70"
