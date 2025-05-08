@@ -50,6 +50,13 @@ function vertical_pred(currentVertical, P) {
   return pred < currentVertical ? currentVertical : pred;
 }
 
+// converts to feet and inches
+function inches_to_feet_inches(inches) {
+  const feet = Math.floor(inches / 12);
+  const new_inches = inches - feet * 12;
+  return `${feet}'${new_inches}`;
+}
+
 function measurable_diff(
   predicted_height,
   predicted_weight,
@@ -136,14 +143,21 @@ export default function PlayerGrowthPredictor() {
       <div className="mt-4 p-4 bg-gray-100 rounded-xl">
         <h2 className="text-lg font-semibold mb-2">Predicted Results</h2>
         <p>
-          Predicted Height: <strong>{height_pred(freshHeight)} in</strong>
+          Predicted Height:{" "}
+          <strong>
+            {height_pred(freshHeight)} in |{" "}
+            {inches_to_feet_inches(height_pred(freshHeight))}
+          </strong>
         </p>
         <p>
           Predicted Weight: <strong>{weight_pred(freshWeight)} lbs</strong>
         </p>
         <p>
           Projected Wingspan:{" "}
-          <strong>{wingspan_pred(currentWingspan, P)} in</strong>
+          <strong>
+            {wingspan_pred(currentWingspan, P)} in |{" "}
+            {inches_to_feet_inches(wingspan_pred(currentWingspan, P))}
+          </strong>
         </p>
         <p>
           Projected Vertical:{" "}
