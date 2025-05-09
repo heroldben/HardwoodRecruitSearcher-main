@@ -94,7 +94,7 @@ export default function PlayerGrowthPredictor() {
         <input
           type="range"
           min="60"
-          max="84"
+          max="79"
           step="0.5"
           value={freshHeight}
           onChange={(e) => setFreshHeight(Number(e.target.value))}
@@ -104,7 +104,7 @@ export default function PlayerGrowthPredictor() {
         <label>Freshman Weight (lbs): {freshWeight}</label>
         <input
           type="range"
-          min="120"
+          min="90"
           max="250"
           step="5"
           value={freshWeight}
